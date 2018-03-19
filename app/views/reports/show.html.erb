@@ -1,24 +1,48 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
+  <strong>Título:</strong>
   <%= @report.title %>
 </p>
 
 <p>
-  <strong>Summary:</strong>
+  <strong>Bajada:</strong>
   <%= @report.summary %>
 </p>
 
 <p>
-  <strong>Body:</strong>
+  <strong>Cuerpo:</strong>
   <%= @report.body %>
 </p>
 
 <p>
-  <strong>Date:</strong>
+  <strong>Fecha publicación:</strong>
   <%= @report.date %>
 </p>
 
-<%= link_to 'Edit', edit_report_path(@report) %> |
-<%= link_to 'Back', reports_path %>
+<h2>Comentarios</h2>
+<% @report.comments.each do |comment| %>
+  <p>
+    <strong><%= comment.user %>:</strong>
+    <%= comment.content %>
+
+    <%= link_to 'Borrar', [comment.report, comment], method: :delete,
+    data: { confirm: 'Seguro que desea borrar el comentario?' } %>
+  </p>
+<% end %>
+
+<h2>Agregar comentario:</h2>
+<%= form_for([@report, @report.comments.build]) do |f| %>
+  <p>Usuario<br>
+    <%= f.text_field :user %>
+  </p>
+  <p>Comentario><br>
+    <%= f.text_area :content %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+
+<%= link_to 'Editar', edit_report_path(@report) %> |
+<%= link_to 'Volver a noticias', reports_path %>

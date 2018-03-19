@@ -24,17 +24,20 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    @report = Report.find(params[:report_id])
+    @comment = @report.comments.create(comment_params)
+    redirect_to report_path(@report)
 
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
-    end
+    #@comment = Comment.new(comment_params)
+    #respond_to do |format|
+    #  if @comment.save
+    #    format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+    #    format.json { render :show, status: :created, location: @comment }
+    #  else
+    #    format.html { render :new }
+    #    format.json { render json: @comment.errors, status: :unprocessable_entity }
+    #  end
+    #end
   end
 
   # PATCH/PUT /comments/1
@@ -54,11 +57,10 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    @report = Report.find(params[:report_id])
+    @comment = @report.comments.find(params[:id])
     @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    redirect_to report_path(@report)
   end
 
   private
