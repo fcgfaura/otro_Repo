@@ -1,42 +1,43 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Título:</strong>
+  <h2>
   <%= @report.title %>
+  </h2>
 </p>
 
 <p>
-  <strong>Bajada:</strong>
+  <h4>
   <%= @report.summary %>
+  </h4>
 </p>
 
 <p>
-  <strong>Cuerpo:</strong>
   <%= @report.body %>
 </p>
 
 <p>
-  <strong>Fecha publicación:</strong>
+  Publicada el
   <%= @report.date %>
 </p>
 
-<h2>Comentarios</h2>
+<h3>Comentarios</h3>
 <% @report.comments.each do |comment| %>
   <p>
     <strong><%= comment.user %>:</strong>
     <%= comment.content %>
 
     <%= link_to 'Borrar', [comment.report, comment], method: :delete,
-    data: { confirm: 'Seguro que desea borrar el comentario?' } %>
+    data: { confirm: 'Borrar el comentario?' } %>
   </p>
 <% end %>
 
-<h2>Agregar comentario:</h2>
+<h3>Agregar comentario:</h3>
 <%= form_for([@report, @report.comments.build]) do |f| %>
   <p>Usuario<br>
     <%= f.text_field :user %>
   </p>
-  <p>Comentario><br>
+  <p>Comentario<br>
     <%= f.text_area :content %>
   </p>
   <p>

@@ -12,25 +12,25 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
+    Título
     <%= form.text_field :title, id: :report_title %>
   </div>
 
   <div class="field">
-    <%= form.label :summary %>
+    <p> Bajada </p>
     <%= form.text_area :summary, id: :report_summary %>
   </div>
 
   <div class="field">
-    <%= form.label :body %>
+    <p> Cuerpo </p>
     <%= form.text_area :body, id: :report_body %>
   </div>
 
   <div class="field">
-    <%= form.label :date %>
+    Fecha
     <%= form.date_select :date, id: :report_date %>
   </div>
-
+  
   <div class="actions">
     <%= form.submit %>
   </div>
